@@ -2,26 +2,33 @@
 {
     static void Main(string[] args)
     {
-        IPersonManager person1 = new Employee();
-        IManagersManager manager1 = new Manager();
+        IPersonManager manager = new Manager();
+        IPersonManager employee = new Employee();
 
-        ManagerInformation managerInformation = new ManagerInformation()
+        PersonalInformation manager1 = new PersonalInformation()
         {
           PersonalId = 1,
           Age = 26,
           FirstName = "Cüneyt", 
           LastName = "Kılıç"
         };
-        manager1.Add(managerInformation);
+        PersonalInformation employee1 = new PersonalInformation()
+        {
+            PersonalId = 1,
+            Age = 25,
+            FirstName = "A",
+            LastName = "Kılıç"
+        };
+        manager.Add(manager1);
+        employee.Add(employee1);
+
 
     }
 
 }
 
-class ManagerInformation : PersonalInformation
-{
-}
-class PersonalInformation 
+
+public class PersonalInformation 
 {
     public int PersonalId { get; set; }
     public string FirstName { get; set; }
@@ -35,15 +42,6 @@ interface IPersonManager
     void Add(PersonalInformation personalInformation);
     void Update(PersonalInformation personalInformation);
     void Delete(PersonalInformation personalInformation);
-
-
-}
-
-interface IManagersManager
-{
-    void Add(ManagerInformation managerInformation);
-    void Update(ManagerInformation managerInformation);
-    void Delete(ManagerInformation managerInformation);
 
 
 }
@@ -69,26 +67,26 @@ class Employee : IPersonManager
     }
 }
 
-class Manager : IManagersManager
+class Manager : IPersonManager
 {
    
 
-    public void Add(ManagerInformation managerInformation)
+    public void Add(PersonalInformation personalInformation)
     {
-        Console.WriteLine("Manager Added : " + managerInformation.FirstName + " " + managerInformation.LastName);
+        Console.WriteLine("Manager Added : " + personalInformation.FirstName + " " + personalInformation.LastName);
 
     }
 
 
-    public void Delete(ManagerInformation managerInformation)
+    public void Delete(PersonalInformation personInformation)
     {
-        Console.WriteLine("Manager Deleted : " + managerInformation.FirstName + " " + managerInformation.LastName);
+        Console.WriteLine("Manager Deleted : " + personInformation.FirstName + " " + personInformation.LastName);
 
     }
 
-    public void Update(ManagerInformation managerInformation)
+    public void Update(PersonalInformation personalInformation)
     {
-        Console.WriteLine("Manager Information Updated : " + managerInformation.FirstName + " " + managerInformation.LastName);
+        Console.WriteLine("Manager Information Updated : " + personalInformation.FirstName + " " + personalInformation.LastName);
 
     }
 }
